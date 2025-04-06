@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentha AI - Forgot Password</title>
+    <link rel="stylesheet" href="/FRONTEND/sign_in_up/sign_in_up.css">
+    <script type="module" src="/BACKEND/forgot.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Forgot Password</h2>
+        <p class="subtitle">Enter your email to reset your password</p>
+        
+        <form id="resetForm">
+            <div>
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <p id="error-message" style="color: red; font-size: 0.9rem; margin-top: 5px;"></p>
+            </div>
+            <button type="submit" id="resetBtn">Reset Password</button>
+            <p class="login-text"><a href="/FRONTEND/sign_in_up/login_in.html">Back to Login</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("resetForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let emailInput = document.getElementById("email");
+            let email = emailInput.value.trim();
+            let errorMessage = document.getElementById("error-message");
+
+            // Simple email format validation
+            if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+                errorMessage.textContent = "Please enter a valid email address.";
+                emailInput.style.border = "1px solid red";
+                return;
+            }
+
+            errorMessage.textContent = "";
+            emailInput.style.border = "1px solid #ccc";
+        });
+    </script>
+</body>
+</html>
