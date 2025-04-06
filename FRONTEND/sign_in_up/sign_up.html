@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🟣Zentha AI</title>
+    <link rel="stylesheet" href="/FRONTEND/sign_in_up/sign_in_up.css">
+    <script type="module" src="/BACKEND/sign_in.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+  
+
+    <div class="container">
+        <h2 class="title">🟣Zentha AI</h2>
+        <p class="subtitle">Your safe space, one convo at a time</p>
+        
+        <form>
+            <div>
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required> <!-- Added id="email" -->
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <button id="submit" type="submit">Sign In</button> 
+
+            <p class="login-text"><a href="/FRONTEND/sign_in_up/login_in.html">Already have an account? Log in</a></p>
+        </form>
+        
+        <div class="terms">
+            <p>or</p>
+            <p>By signing up, you agree to our 
+            <a href="/FRONTEND/terms_of_service/terms_of_service.html">Terms of Service</a>, 
+            <a href="/FRONTEND/privacy/privacy_policy.html">Privacy Policy</a>, and acknowledge our 
+            <a href="/FRONTEND/ai_diclamer/ai_diclamer.html">AI disclaimer</a>.</p> 
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            emailjs.init("bTqjAGYTt67AAUbQV"); // Replace with your actual public key
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!-- yuvrajjsoni17@gmail.com -->
