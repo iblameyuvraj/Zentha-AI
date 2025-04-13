@@ -320,11 +320,13 @@ button:hover .arrow:before {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  color: whitesmoke;
 }
 
 .final-cta p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
+color: whitesmoke;
 }
 
 .final-cta .cta-button {

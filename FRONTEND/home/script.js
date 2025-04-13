@@ -65,5 +65,24 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", animateOnScroll)
     window.addEventListener("scroll", animateOnScroll)
   })
-  
+
+
+  // mobile--
+  function isMobileDevice() {
+    return /iPhone|iPad|iPod|Android|Mobile/i.test(navigator.userAgent);
+  }
+
+  function closeModal() {
+    document.getElementById("mobileWarningModal").style.display = "none";
+  }
+
+  window.onload = function () {
+    if (isMobileDevice()) {
+      const modal = document.getElementById("mobileWarningModal");
+      modal.style.display = "flex";
+    }
+  };
+
+
+ 
   

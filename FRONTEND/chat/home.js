@@ -6,19 +6,16 @@ const themeToggleBtn = document.querySelector("#theme-toggle-btn");
 const voiceInputBtn = document.querySelector("#voice-input-btn");
 const stopResponseBtn = document.querySelector("#stop-response-btn");
 
-// API Setup
 const API_KEY = "AIzaSyDwW6rOBR46czH-pwovGDNcrdwVRmXiUA0";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 let controller, typingInterval;
 const chatHistory = [];
 
-// Set initial theme from local storage
 const isLightTheme = localStorage.getItem("themeColor") === "light_mode";
 document.body.classList.toggle("light-theme", isLightTheme);
 themeToggleBtn.textContent = isLightTheme ? "dark_mode" : "light_mode";
 
-// Function to create message elements
 const createMessageElement = (content, ...classes) => {
   const div = document.createElement("div");
   div.classList.add("message", ...classes);
@@ -26,15 +23,12 @@ const createMessageElement = (content, ...classes) => {
   return div;
 };
 
+const scrollToBottom = () =>
+  container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
 
-// Scroll to the bottom of the container
-const scrollToBottom = () => container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
-
-// Simulate typing effect for bot responses
 const typingEffect = (text, textElement, botMsgDiv) => {
   textElement.textContent = "";
   let index = 0;
-
   typingInterval = setInterval(() => {
     if (index < text.length) {
       textElement.textContent += text[index++];
@@ -47,7 +41,6 @@ const typingEffect = (text, textElement, botMsgDiv) => {
   }, 40);
 };
 
-// Make API call and generate the bot's response
 const generateResponse = async (botMsgDiv) => {
   const textElement = botMsgDiv.querySelector(".message-text");
   controller = new AbortController();
@@ -71,9 +64,18 @@ const generateResponse = async (botMsgDiv) => {
 
     if (!response.ok) throw new Error(data.error?.message || "Unknown error");
 
-    const responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
-    typingEffect(responseText, textElement, botMsgDiv);
+    let responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
 
+    const promptLower = userInput.toLowerCase();
+    if (
+      promptLower.includes("who created you") ||
+      promptLower.includes("who made you") ||
+      promptLower.includes("your creator")
+    ) {
+      responseText = "I Was Created By Zentha And Trained On Google Data.";
+    }
+
+    typingEffect(responseText, textElement, botMsgDiv);
     chatHistory.push({ role: "model", parts: [{ text: responseText }] });
   } catch (error) {
     console.error("API Error:", error);
@@ -85,7 +87,6 @@ const generateResponse = async (botMsgDiv) => {
   }
 };
 
-// Handle the form submission
 const handleFormSubmit = (e) => {
   e.preventDefault();
   const userMessage = promptInput.value.trim();
@@ -93,18 +94,18 @@ const handleFormSubmit = (e) => {
 
   document.body.classList.add("chats-active", "bot-responding");
 
+  // Hide welcome message
+  document.querySelector(".default-text")?.classList.add("hide");
+
   const userMsgDiv = createMessageElement(`<p class="message-text"></p>`, "user-message");
   userMsgDiv.querySelector(".message-text").textContent = userMessage;
-  
+
   chatsContainer.appendChild(userMsgDiv);
   scrollToBottom();
 
   setTimeout(() => {
     promptInput.value = "";
   }, 1000);
-
-
-  
 
   setTimeout(() => {
     const botMsgHTML = `<img class="avatar" src="/FRONTEND/assests/Zentha.jpg" /> <p class="message-text">Just a sec...</p>`;
@@ -115,7 +116,6 @@ const handleFormSubmit = (e) => {
   }, 600);
 };
 
-// Stop Bot Response
 stopResponseBtn.addEventListener("click", () => {
   if (controller) {
     controller.abort();
@@ -126,29 +126,21 @@ stopResponseBtn.addEventListener("click", () => {
   document.body.classList.remove("bot-responding");
 });
 
-// Toggle dark/light theme
 themeToggleBtn.addEventListener("click", () => {
   const isLightTheme = document.body.classList.toggle("light-theme");
   localStorage.setItem("themeColor", isLightTheme ? "light_mode" : "dark_mode");
   themeToggleBtn.textContent = isLightTheme ? "dark_mode" : "light_mode";
 });
 
-// Delete all chats
 document.querySelector("#delete-chats-btn").addEventListener("click", () => {
   chatHistory.length = 0;
   chatsContainer.innerHTML = "";
   document.body.classList.remove("chats-active", "bot-responding");
+
+  // Show welcome text again after deleting chats
+  document.querySelector(".default-text")?.classList.remove("hide");
 });
 
-// Handle suggestions click
-// document.querySelectorAll(".suggestions-item").forEach((suggestion) => {
-//   suggestion.addEventListener("click", () => {
-//     promptInput.value = suggestion.querySelector(".text").textContent;
-//     promptForm.dispatchEvent(new Event("submit"));
-//   });
-// });
-
-// Voice Input Handling
 if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = new SpeechRecognition();
@@ -177,35 +169,30 @@ if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
   voiceInputBtn.style.display = "none";
 }
 
-// Form Submission Event Listener
 promptForm.addEventListener("submit", handleFormSubmit);
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   function typeEffect(element, text, speed, callback) {
-      let i = 0;
-      function typing() {
-          if (i < text.length) {
-              element.innerHTML += text.charAt(i);
-              i++;
-              setTimeout(typing, speed);
-          } else if (callback) {
-              setTimeout(callback, 500); // Small delay before starting the next one
-          }
+    let i = 0;
+    function typing() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
+      } else if (callback) {
+        setTimeout(callback, 500);
       }
-      typing();
+    }
+    typing();
   }
 
   const heading = document.querySelector(".heading");
   const subHeading = document.querySelector(".sub-heading");
 
-  // Clear initial content
   heading.innerHTML = "";
   subHeading.innerHTML = "";
 
   typeEffect(heading, "Hello, there!", 150, function () {
-      typeEffect(subHeading, "How can I help you today?", 120);
+    typeEffect(subHeading, "How can I help you today?", 120);
   });
 });
-

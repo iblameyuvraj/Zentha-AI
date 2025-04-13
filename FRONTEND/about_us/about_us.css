@@ -243,11 +243,7 @@ nav {
     align-items: center;
 }
 
-.ai-illustration {
-    position: relative;
-    width: 300px;
-    height: 300px;
-}
+
 
 .circle {
     position: absolute;
@@ -767,3 +763,22 @@ footer {
 .footer-column ul li a:hover {
     color: var(--white);
 }
+
+
+#business-image {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 40px; /* Keep space from the edge */
+    margin-top: 40px;
+    position: relative;
+}
+
+#business-image img {
+    width: 700px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 6%; /* Fully round */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+

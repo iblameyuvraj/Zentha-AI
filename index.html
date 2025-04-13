@@ -11,12 +11,50 @@
 </head>
 
 <body>
+<!-- Mobile Warning Modal -->
+<div id="mobileWarningModal" style="
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+">
+  <div style="
+    background: rgb(16, 15, 15);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  ">
+    <h2 style="margin-bottom: 15px;
+    color: red;">Mobile Warning!</h2>
+    <p style="margin-bottom: 20px;">
+      This website is not optimized for mobile.<br>
+      Website OWN features may not work well.<br><br>
+  Do you still want to continue?
+    </p>
+    <button onclick="closeModal()" style="
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    ">Yes, continue</button>
+  </div>
+</div>
+
     <!-- Navigation Bar -->
     <header>
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <h1><a href="/FRONTEND/home/index.html" style="color: white; text-decoration: none;">🟣 Zentha AI</a></h1>
+                    <h1><a href="index.html" style="color: white; text-decoration: none;">🟣 Zentha AI</a></h1>
                 </div>
                 <div class="nav-toggle" id="navToggle">
                 </div>
