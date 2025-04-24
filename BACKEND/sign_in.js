@@ -12,7 +12,7 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/11.5.0/firebase
 
 // Config
 const firebaseConfig = {
-    apiKey: "AIzaSyCI0lE9HeKBcG8L7_uT2TTdBzdYrGBB8nI",
+    apiKey:"AIzaSyCI0lE9HeKBcG8L7_uT2TTdBzdYrGBB8nI",
     authDomain: "zentha-ai.firebaseapp.com",
     projectId: "zentha-ai",
     storageBucket: "zentha-ai.appspot.com",

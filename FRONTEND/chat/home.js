@@ -9,6 +9,9 @@ const stopResponseBtn = document.querySelector("#stop-response-btn");
 const API_KEY = "AIzaSyDwW6rOBR46czH-pwovGDNcrdwVRmXiUA0";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
+
+
+
 let controller, typingInterval;
 const chatHistory = [];
 
@@ -50,37 +53,58 @@ const generateResponse = async (botMsgDiv) => {
   chatHistory.push({ role: "user", parts: [{ text: userInput }] });
 
   try {
-    const response = await fetch(API_URL, {
+    document.body.classList.add("bot-responding");
+    botMsgDiv.classList.add("loading");
+
+    // First, ask Gemini if this is a creator-related question
+    const originCheckResponse = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: userInput }] }]
+        contents: [{
+          role: "user",
+          parts: [{
+            text: `Is the following prompt asking about the chatbot's creator or how it was made? Respond only with yes or no.\nPrompt: "${userInput}"`
+          }]
+        }]
       }),
       signal: controller.signal,
     });
 
-    const data = await response.json();
-    console.log("API Response:", data);
+    const originCheckData = await originCheckResponse.json();
+    const isOriginPrompt = originCheckData?.candidates?.[0]?.content?.parts?.[0]?.text?.toLowerCase().includes("yes");
 
-    if (!response.ok) throw new Error(data.error?.message || "Unknown error");
+    let responseText;
 
-    let responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
+    if (isOriginPrompt) {
+      responseText = "I was developed by zentha.";
+    } else {
+      // Proceed with regular Gemini API call
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: userInput }] }]
+        }),
+        signal: controller.signal,
+      });
 
-    const promptLower = userInput.toLowerCase();
-    if (
-      promptLower.includes("who created you") ||
-      promptLower.includes("who made you") ||
-      promptLower.includes("your creator")
-    ) {
-      responseText = "I Was Created By Zentha And Trained On Google Data.";
+      const data = await response.json();
+      console.log("API Response:", data);
+
+      if (!response.ok) throw new Error(data.error?.message || "Unknown error");
+
+      responseText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
     }
 
     typingEffect(responseText, textElement, botMsgDiv);
     chatHistory.push({ role: "model", parts: [{ text: responseText }] });
+
   } catch (error) {
     console.error("API Error:", error);
     textElement.textContent = error.name === "AbortError" ? "Response stopped." : error.message;
     textElement.style.color = "#d62939";
+  } finally {
     botMsgDiv.classList.remove("loading");
     document.body.classList.remove("bot-responding");
     scrollToBottom();

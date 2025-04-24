@@ -2,9 +2,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
 
-// Firebase Configuration
+// Firebase Configuration using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyCI0lE9HeKBcG8L7_uT2TTdBzdYrGBB8nI",
+  apiKey:"AIzaSyCI0lE9HeKBcG8L7_uT2TTdBzdYrGBB8nI",
   authDomain: "zentha-ai.firebaseapp.com",
   projectId: "zentha-ai",
   storageBucket: "zentha-ai.appspot.com",

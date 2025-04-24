@@ -9,7 +9,7 @@ import {
 
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCI0lE9HeKBcG8L7_uT2TTdBzdYrGBB8nI",
+    apiKey:"AIzaSyCI0lE9HeKBcG8L7_uT2TTdBzdYrGBB8nI",
   authDomain: "zentha-ai.firebaseapp.com",
   projectId: "zentha-ai",
   storageBucket: "zentha-ai.appspot.com",
@@ -17,6 +17,11 @@ const firebaseConfig = {
   appId: "1:508988316943:web:9eb2f29a81326d9f90f27a",
   measurementId: "G-FJS5TXSHXE"
 };
+
+if (!firebaseConfig.apiKey) {
+    console.error("Error: Firebase API key is missing. Check your .env file.");
+    alert("Firebase configuration error. Please contact support.");
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
