@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://zentha.in/</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/sign_in_up/sign_up</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/sign_in_up/login_in</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/about_us/about_us</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/contact/contact</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/privacy/privacy_policy</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/terms_of_service/terms_of_service</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/ai_diclamer/ai_diclamer</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://zentha.in/frontend/sign_in_up/forgot</loc>
+  <lastmod>2025-04-25T08:43:25+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
